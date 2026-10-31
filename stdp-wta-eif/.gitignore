@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+/runs/
+/build/
+*.exe
+*.obj
+stdp-mnist/
+brain_env/
+*.pickle
+*-ubyte*

@@ -1,0 +1,153 @@
+{
+  "params": {
+    "vd": 100.0,
+    "delta": 1.0,
+    "e_l": -65.0,
+    "v_thresh": -52.0,
+    "offset": 20.0
+  },
+  "vd_rule": "homeo: Vx = vth \u2212 s per neuron (s at end of the run; --s-init trained, --s-mode frozen)",
+  "sharing": {
+    "this test run": {
+      "gini": 0.3211967128065876,
+      "top1": 3.4461443362695103,
+      "top10": 23.513146565997747,
+      "silent": 0,
+      "spikes_per_image": 18.1188
+    },
+    "this label run": {
+      "gini": 0.2712463476276972,
+      "top1": 2.893974943725353,
+      "top10": 20.949797868710913,
+      "silent": 0,
+      "spikes_per_image": 17.488633333333333
+    },
+    "baseline test run": {
+      "gini": 0.301276294962218,
+      "top1": 3.34472478731913,
+      "top10": 22.3375039851445,
+      "silent": 0,
+      "spikes_per_image": 17.8789
+    },
+    "baseline label run": {
+      "gini": 0.2514049478286889,
+      "top1": 2.868408606094536,
+      "top10": 19.953571876719337,
+      "silent": 0,
+      "spikes_per_image": 17.266833333333334
+    }
+  },
+  "Vx_min": -38.693702815198826,
+  "Vx_max": -20.60106614975134,
+  "c_boundary": 3.0,
+  "s_at": "end",
+  "s_start_mean": -1.2312774196881149,
+  "s_end_mean": -1.2312774196881149,
+  "neurons_per_region": {
+    "A": 399,
+    "B": 1,
+    "C": 0
+  },
+  "per_digit": {
+    "0": {
+      "neurons": 62,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 96.93877551020408,
+      "false_pos": 48
+    },
+    "1": {
+      "neurons": 27,
+      "share": {
+        "A": 96.3,
+        "B": 3.7,
+        "C": 0.0
+      },
+      "accuracy": 99.38325991189427,
+      "false_pos": 124
+    },
+    "2": {
+      "neurons": 40,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 83.52713178294574,
+      "false_pos": 16
+    },
+    "3": {
+      "neurons": 43,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 78.31683168316832,
+      "false_pos": 80
+    },
+    "4": {
+      "neurons": 28,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 81.26272912423626,
+      "false_pos": 103
+    },
+    "5": {
+      "neurons": 32,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 85.65022421524664,
+      "false_pos": 110
+    },
+    "6": {
+      "neurons": 41,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 93.94572025052193,
+      "false_pos": 40
+    },
+    "7": {
+      "neurons": 33,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 88.52140077821011,
+      "false_pos": 81
+    },
+    "8": {
+      "neurons": 51,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 89.73305954825463,
+      "false_pos": 238
+    },
+    "9": {
+      "neurons": 43,
+      "share": {
+        "A": 100.0,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "accuracy": 90.48562933597621,
+      "false_pos": 270
+    }
+  }
+}

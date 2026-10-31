@@ -1,0 +1,94 @@
+{
+  "protocol": "assignments from 60000 training examples (paper protocol)",
+  "accuracy": 89.01,
+  "per_digit": [
+    97.85714285714285,
+    99.38325991189427,
+    84.68992248062015,
+    80.990099009901,
+    79.12423625254583,
+    86.88340807174887,
+    93.1106471816284,
+    85.60311284046692,
+    88.09034907597535,
+    93.1615460852329
+  ],
+  "label_dir": "runs/EIF_s0_label400_dyn",
+  "neurons_per_digit": [
+    64,
+    29,
+    41,
+    42,
+    28,
+    31,
+    40,
+    31,
+    48,
+    46
+  ],
+  "median_confidence_margin": 1.0,
+  "test_images_without_spikes": 0,
+  "test_run": {
+    "vd_mode": "homeo",
+    "vd_e_mv": 100.0,
+    "vd_k_mv": 2.0,
+    "delta_e_mv": 1.0,
+    "s_init": "trained",
+    "s_mode": "adaptive",
+    "homeo": "a=0.02,r0=0.0735,smin=-1.5,smax=2.0,margin=1",
+    "s_source": "runs/EIF_s0_train400/weights\\s_A.npy",
+    "s_start": {
+      "region_A": 398,
+      "region_B": 2,
+      "s_min_mV": -1.4995031399999332,
+      "s_max_mV": 0.9099860214048147,
+      "s_mean_mV": -1.2293330595245628,
+      "at_floor": 16,
+      "at_ceiling": 0
+    },
+    "s_end": {
+      "region_A": 307,
+      "region_B": 93,
+      "s_min_mV": -1.4997633299999682,
+      "s_max_mV": 2.0,
+      "s_mean_mV": -0.5708806386242237,
+      "at_floor": 11,
+      "at_ceiling": 4
+    },
+    "mean_exc_spikes_per_example": 18.3592,
+    "retries_total": 139,
+    "examples_hitting_retry_cap": 0
+  },
+  "label_run": {
+    "vd_mode": "homeo",
+    "vd_e_mv": 100.0,
+    "vd_k_mv": 2.0,
+    "delta_e_mv": 1.0,
+    "s_init": "trained",
+    "s_mode": "adaptive",
+    "homeo": "a=0.02,r0=0.0735,smin=-1.5,smax=2.0,margin=1",
+    "s_source": "runs/EIF_s0_train400/weights\\s_A.npy",
+    "s_start": {
+      "region_A": 398,
+      "region_B": 2,
+      "s_min_mV": -1.4995031399999332,
+      "s_max_mV": 0.9099860214048147,
+      "s_mean_mV": -1.2293330595245628,
+      "at_floor": 16,
+      "at_ceiling": 0
+    },
+    "s_end": {
+      "region_A": 253,
+      "region_B": 147,
+      "s_min_mV": -1.4858233199980935,
+      "s_max_mV": 1.5214575100701289,
+      "s_mean_mV": -0.3535897480010543,
+      "at_floor": 0,
+      "at_ceiling": 0
+    },
+    "mean_exc_spikes_per_example": 17.848733333333332,
+    "retries_total": 894,
+    "examples_hitting_retry_cap": 0
+  },
+  "label_test_mismatch": {}
+}

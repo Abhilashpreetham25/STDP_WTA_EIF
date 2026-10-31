@@ -1,0 +1,12 @@
+{
+  "mode": "train",
+  "n_e": 400,
+  "epochs": 3,
+  "stim_ms": 350,
+  "rest_ms": 150,
+  "min_spikes": 5,
+  "max_retries": 100,
+  "start_intensity": 2.0,
+  "intensity_step": 1.0,
+  "seed": 0
+}

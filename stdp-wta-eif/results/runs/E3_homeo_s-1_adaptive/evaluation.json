@@ -1,0 +1,94 @@
+{
+  "protocol": "assignments from 60000 training examples (paper protocol)",
+  "accuracy": 89.31,
+  "per_digit": [
+    97.24489795918367,
+    99.47136563876651,
+    84.30232558139535,
+    81.88118811881188,
+    81.9755600814664,
+    85.53811659192824,
+    94.05010438413362,
+    88.81322957198444,
+    88.19301848049281,
+    90.28741328047572
+  ],
+  "label_dir": "runs/EIF_s-1_label400_dyn",
+  "neurons_per_digit": [
+    62,
+    28,
+    40,
+    42,
+    28,
+    32,
+    41,
+    33,
+    51,
+    43
+  ],
+  "median_confidence_margin": 1.0,
+  "test_images_without_spikes": 0,
+  "test_run": {
+    "vd_mode": "homeo",
+    "vd_e_mv": 100.0,
+    "vd_k_mv": 2.0,
+    "delta_e_mv": 1.0,
+    "s_init": "trained",
+    "s_mode": "adaptive",
+    "homeo": "a=0.02,r0=0.0735,smin=-1.5,smax=2.0,margin=1",
+    "s_source": "runs/EIF_s-1_train400/weights\\s_A.npy",
+    "s_start": {
+      "region_A": 399,
+      "region_B": 1,
+      "s_min_mV": -1.4997346649999643,
+      "s_max_mV": 1.7650284041694675,
+      "s_mean_mV": -1.2312774196881149,
+      "at_floor": 16,
+      "at_ceiling": 0
+    },
+    "s_end": {
+      "region_A": 294,
+      "region_B": 106,
+      "s_min_mV": -1.499791994999972,
+      "s_max_mV": 2.0,
+      "s_mean_mV": -0.531355224792172,
+      "at_floor": 12,
+      "at_ceiling": 2
+    },
+    "mean_exc_spikes_per_example": 18.3244,
+    "retries_total": 138,
+    "examples_hitting_retry_cap": 0
+  },
+  "label_run": {
+    "vd_mode": "homeo",
+    "vd_e_mv": 100.0,
+    "vd_k_mv": 2.0,
+    "delta_e_mv": 1.0,
+    "s_init": "trained",
+    "s_mode": "adaptive",
+    "homeo": "a=0.02,r0=0.0735,smin=-1.5,smax=2.0,margin=1",
+    "s_source": "runs/EIF_s-1_train400/weights\\s_A.npy",
+    "s_start": {
+      "region_A": 399,
+      "region_B": 1,
+      "s_min_mV": -1.4997346649999643,
+      "s_max_mV": 1.7650284041694675,
+      "s_mean_mV": -1.2312774196881149,
+      "at_floor": 16,
+      "at_ceiling": 0
+    },
+    "s_end": {
+      "region_A": 250,
+      "region_B": 150,
+      "s_min_mV": -1.4669579049901766,
+      "s_max_mV": 2.0,
+      "s_mean_mV": -0.331570847921231,
+      "at_floor": 0,
+      "at_ceiling": 1
+    },
+    "mean_exc_spikes_per_example": 17.86231666666667,
+    "retries_total": 883,
+    "examples_hitting_retry_cap": 0
+  },
+  "label_test_mismatch": {}
+}
