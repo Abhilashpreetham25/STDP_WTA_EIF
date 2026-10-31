@@ -10,19 +10,66 @@ To make these experiments possible I first ported the original Brian1 code to Br
 
 ## Main findings
 
-All results are from 400-neuron networks evaluated on the 10,000 MNIST test images, using the paper's protocol: neurons get their labels from the 60,000 training images.
+All results are from 400-neuron networks evaluated on the 10,000 MNIST test images, using the paper's protocol: neurons get their labels from the 60,000 training images. Every figure below comes from the reports in [`results/`](results/README.md).
 
-1. **A single fixed spike-onset point (vd) breaks the network.** With LIF-trained weights, accuracy falls as more neurons have their spike detector past the EIF runaway point Vx. It drops from 88.7% to 84.6% and then to 62.4%. The high-θ neurons are pushed past Vx first and over-respond. The digit-1 neurons have the highest θ, so "1" becomes an attractor: wrong "1" answers rise from 136 to 724.
-2. **Training with a fixed vd lets neurons escape the adaptive threshold.** Once a neuron's threshold θ rises past Vx, the exponential term fires the neuron before the threshold is reached, so raising θ no longer slows it down.
-   - θ runs away: 45 neurons end above 60 mV and one reaches 375 mV. In the LIF network θ stays at or below 50 mV.
-   - Those 45 neurons produce 30% of all test spikes.
-   - Accuracy drops to 82.4%.
-3. **A per-neuron homeostatic onset point fixes this.** Each neuron keeps its own distance s = threshold − Vx. Its own spikes push s down, and a slow upward drift pushes it back up.
-   - Trained for 3 epochs, the network matches LIF when s keeps adapting during testing. Accuracy is 89.31% (s₀ = −1) and 89.01% (s₀ = 0), against 89.40% for LIF. Per-image McNemar tests against LIF give p = 0.72 and p = 0.09, so neither difference is significant.
-   - Firing is shared more evenly: the Gini coefficient of test spikes is 0.24, against 0.30 for LIF.
-   - With s frozen at test, accuracy is slightly lower (88.90% and 88.41%) and the Gini stays at the LIF level.
-4. **The homeostasis is one-sided.** Pushing s further into region A only makes a neuron more LIF-like, so the rule can raise quiet neurons but cannot brake busy ones. This is why the Gini falls while accuracy stays the same.
-5. **The neuron model is not the bottleneck under rate coding.** The LIF network and all four homeostatic EIF networks make the same four main errors: 4→9, 3→8, 7→9 and 2→8. The readout counts spikes over 350 ms, which averages away exactly what EIF changes: when the spike happens.
+### Baseline: what the LIF network learns (89.40%)
+
+Each excitatory neuron learns one prototype digit through STDP. Lateral inhibition makes them compete, and the adaptive threshold θ keeps any single neuron from winning every image.
+
+![LIF receptive fields](results/figures/lif_receptive_fields.png)
+*Input weights of all 400 LIF neurons, grouped by the digit each one was assigned.*
+
+To place each EIF neuron, I use the runaway point Vx (above it, the exponential term fires the neuron by itself) and compare it with the neuron's spike detector (−72 mV + θ):
+- **Region A**: the detector is below Vx, so the neuron behaves like LIF.
+- **Region B**: the detector is just past Vx, so the runaway decides the spike.
+- **Region C**: the detector is far past Vx, so θ no longer restrains the neuron.
+
+### 1. One fixed spike-onset point (vd) breaks the network (E1)
+
+With LIF-trained weights, accuracy falls as more neurons have their detector past Vx: from 88.7% to 84.6%, then to 62.4%.
+
+![E1 regions](results/figures/e1_regions_vd-31.5.png)
+*vd = −31.5 mV. Left: where each neuron sits relative to Vx. Right: the same, by assigned digit. The digit-1 neurons have the highest θ, so they are pushed furthest into region C.*
+
+![E1 per digit](results/figures/e1_per_digit_vd-31.5.png)
+*Same run, compared with LIF (grey). 75% of the digit-1 neurons are in region C, and "1" becomes an attractor: 692 images of other digits are called "1", against 136 for LIF. Digit 2 drops from 86.6% to 69.5%. Most of those images are called "1".*
+
+### 2. Training with a fixed vd lets neurons escape the adaptive threshold (E2)
+
+Once θ rises past Vx, the exponential term fires the neuron before the detector is reached. Raising θ no longer slows it down, so θ keeps climbing.
+- 45 neurons end with θ above 60 mV, and one reaches 375 mV. In the LIF network, θ stays at or below 50 mV.
+- Those 45 neurons fire 30% of all test spikes.
+- Accuracy drops to 82.4%.
+
+![E2 regions](results/figures/e2_regions.png)
+*EIF-trained network. 74 neurons sit far into region C, some more than 600 Δ past Vx. Learning creates the same digit-1 attractor: 940 images wrongly called "1".*
+
+### 3. A per-neuron homeostatic onset point fixes it (E3)
+
+Each neuron keeps its own distance s = threshold − Vx. Every spike it fires pushes s down (less excitable), and a slow drift pushes s back up (more excitable). Vx therefore moves with the neuron's own θ, and the neuron adapts only from its own activity.
+
+- Trained for 3 epochs, the network matches LIF when s keeps adapting during testing: 89.31% (s₀ = −1) and 89.01% (s₀ = 0), against 89.40% for LIF. McNemar tests give p = 0.72 and p = 0.09, so neither difference is significant.
+- No neuron reaches region C, and θ stays at 35–50 mV, as in LIF.
+
+![E3 regions](results/figures/e3_regions_s-1_adaptive.png)
+*s₀ = −1, adaptive s, at the end of the test run: 294 neurons in A, 106 in B, none in C. The digit-1 neurons, the busiest, are held in A, which is LIF-like.*
+
+![E3 per digit](results/figures/e3_per_digit_s-1_adaptive.png)
+*Same network, compared with LIF (grey). The region mix differs by digit: 96% of digit-1 neurons are in A, while 30–39% of the neurons for 0, 2, 3, 8 and 9 are in B. Accuracy per digit is close to LIF, and the digit-1 attractor is gone: 148 wrong "1" answers, against 136 for LIF.*
+
+### 4. The homeostasis does what it is meant to: quiet neurons rise, busy ones fall
+
+![E3 s movement](results/figures/e3_s_movement_s-1_adaptive.png)
+*Left: s of each neuron before and after the test run. Right: the change in s against how much the neuron fired. The correlation is r = −0.72: quiet neurons gained up to 3 mV of excitability, busy ones lost some.*
+
+The rule is one-sided, though. Lowering s further only makes a neuron more LIF-like, so busy neurons sit near the floor while quiet ones climb into region B. The result is that firing is shared more evenly, without changing accuracy:
+
+![E3 Gini](results/figures/e3_gini_s-1_adaptive.png)
+*Left: Lorenz curves; the closer to the diagonal, the more evenly neurons share the spikes. The Gini is 0.24 for EIF against 0.30 for LIF (test), and 0.15 against 0.25 (label). Right: within the neurons of each digit, EIF shares the firing more evenly than LIF for all ten digits.*
+
+### 5. Under rate coding, the neuron model is not the bottleneck
+
+The LIF network and all four homeostatic EIF networks make the same four main errors: 4→9, 3→8, 7→9 and 2→8. The readout counts spikes over 350 ms, which averages away exactly what EIF changes: when each spike happens.
 
 Details, settings and every number: [docs/experiments.md](docs/experiments.md).
 
